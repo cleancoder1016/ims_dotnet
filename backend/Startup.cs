@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using InventoryManagementSystem.Data;
+using InventoryManagementSystem.Services;
+using InventoryManagementSystem.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManagementSystem
 {
@@ -54,4 +58,4 @@ namespace InventoryManagementSystem
             });
         }
     }
-}y
+}
