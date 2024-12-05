@@ -1,15 +1,22 @@
+.full-width-table-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px; /* Adjust the padding as needed */
+}
+
 .full-width-table {
     width: 100%;
+    max-width: 90%; /* Adjust the max-width as needed */
     border-collapse: collapse;
 }
 
 .full-width-table th, .full-width-table td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
+    text-align: center;
 }
 
 .full-width-table th {
-    background-color: #f2f2f2;
+    background-color: skyblue;
     font-weight: bold;
 }
