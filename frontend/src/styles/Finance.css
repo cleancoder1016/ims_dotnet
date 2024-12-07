@@ -1,0 +1,44 @@
+/* General styles for the Finance page */
+.finance-container {
+  padding: 20px;
+}
+
+.finance-header {
+  margin-bottom: 20px;
+}
+
+.finance-card {
+  margin-bottom: 20px;
+}
+
+.finance-chart {
+  height: 400px;
+}
+
+.finance-table-container {
+  margin-top: 20px;
+}
+
+.finance-dialog {
+  min-width: 400px;
+}
+
+.finance-dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.finance-dialog-content .MuiTextField-root {
+  margin-bottom: 20px;
+}
+
+.finance-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.finance-loading {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

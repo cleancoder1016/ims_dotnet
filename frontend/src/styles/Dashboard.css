@@ -1,0 +1,27 @@
+/* General styles for the Dashboard page */
+.dashboard-container {
+  padding: 20px;
+}
+
+.dashboard-header {
+  margin-bottom: 20px;
+}
+
+.dashboard-card {
+  margin-bottom: 20px;
+}
+
+.dashboard-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-card-title {
+  margin-bottom: 10px;
+}
+
+.dashboard-card-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+}

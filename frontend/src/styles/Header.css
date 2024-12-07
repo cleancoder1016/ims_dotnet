@@ -1,0 +1,17 @@
+/* General styles for the Header component */
+.header-container {
+  padding: 20px;
+  text-align: center;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-title {
+  margin-bottom: 20px;
+}
+
+.header-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

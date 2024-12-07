@@ -28,6 +28,10 @@
   color: #61dafb;
 }
 
+/* Ensure the navbar links are aligned to the right */
+.navbar-nav.ml-auto {
+  margin-left: auto;
+}
 
 @keyframes App-logo-spin {
   from {
@@ -37,3 +41,4 @@
     transform: rotate(360deg);
   }
 }
+
