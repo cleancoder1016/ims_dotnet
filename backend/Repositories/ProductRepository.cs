@@ -22,7 +22,7 @@ namespace InventoryManagementSystem.Repositories
 
         public async Task<Product> GetByIdAsync(int id)
         {
-            return await _context.Products.Include(p => p.Supplier).FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.Products.Include(p => p.Supplier).FirstOrDefaultAsync(p => p.Id == id)!;
         }
 
         public async Task<Product> AddAsync(Product product)
