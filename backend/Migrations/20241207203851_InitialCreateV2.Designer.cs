@@ -3,6 +3,7 @@ using InventoryManagementSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventoryManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241207203851_InitialCreateV2")]
+    partial class InitialCreateV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +55,7 @@ namespace InventoryManagementSystem.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Product 1",
+                            Name = "Product1",
                             PurchasePrice = 10.0m,
                             SellingPrice = 15.0m,
                             SupplierId = 1
@@ -60,7 +63,7 @@ namespace InventoryManagementSystem.Migrations
                         new
                         {
                             Id = 2,
-                            Name = "Product 2",
+                            Name = "Product2",
                             PurchasePrice = 20.0m,
                             SellingPrice = 25.0m,
                             SupplierId = 2
@@ -91,14 +94,14 @@ namespace InventoryManagementSystem.Migrations
                         new
                         {
                             Id = 1,
-                            ContactInfo = "Contact 1",
-                            Name = "Supplier 1"
+                            ContactInfo = "Contact1",
+                            Name = "Supplier1"
                         },
                         new
                         {
                             Id = 2,
-                            ContactInfo = "Contact 2",
-                            Name = "Supplier 2"
+                            ContactInfo = "Contact2",
+                            Name = "Supplier2"
                         });
                 });
 
