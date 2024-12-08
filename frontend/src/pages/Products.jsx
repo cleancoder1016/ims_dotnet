@@ -1,26 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Typography,
-  MenuItem
-} from '@mui/material';
 import axios from 'axios';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from '@mui/material';
 
 function Products() {
   const [products, setProducts] = useState([]);
-  const [open, setOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({
     name: '',
     purchase_price: '',
@@ -29,6 +12,7 @@ function Products() {
   });
   const [suppliers, setSuppliers] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     fetchProducts();
@@ -53,19 +37,7 @@ function Products() {
     }
   };
 
-  const handleOpen = (product = null) => {
-    if (product) {
-      setCurrentProduct(product);
-      setIsEdit(true);
-    } else {
-      setCurrentProduct({
-        name: '',
-        purchase_price: '',
-        selling_price: '',
-        supplier_id: ''
-      });
-      setIsEdit(false);
-    }
+  const handleOpen = () => {
     setOpen(true);
   };
 
@@ -80,46 +52,38 @@ function Products() {
     setIsEdit(false);
   };
 
+  const handleEdit = (product) => {
+    setCurrentProduct(product);
+    setIsEdit(true);
+    handleOpen();
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`/api/products/${id}`);
+      fetchProducts();
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    }
+  };
+
   const handleSubmit = async () => {
     try {
-      const productData = {
-        ...currentProduct,
-        purchase_price: parseFloat(currentProduct.purchase_price),
-        selling_price: parseFloat(currentProduct.selling_price),
-        supplier_id: currentProduct.supplier_id || null
-      };
-
       if (isEdit) {
-        await axios.put(`/api/products/${currentProduct.id}`, productData);
+        await axios.put(`/api/products/${currentProduct.id}`, currentProduct);
       } else {
-        await axios.post('/api/products', productData);
+        await axios.post('/api/products', currentProduct);
       }
-      handleClose();
       fetchProducts();
+      handleClose();
     } catch (error) {
       console.error('Error saving product:', error);
     }
   };
 
-  const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this product?')) {
-      try {
-        await axios.delete(`/api/products/${id}`);
-        fetchProducts();
-      } catch (error) {
-        console.error('Error deleting product:', error);
-      }
-    }
-  };
-
   return (
-    <>
-      <Typography variant="h4" gutterBottom>
-        Products
-      </Typography>
-      <Button variant="contained" color="primary" onClick={() => handleOpen()} sx={{ mb: 2 }}>
-        Add Product
-      </Button>
+    <div>
+      <Button variant="contained" color="primary" onClick={handleOpen}>Add Product</Button>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -135,14 +99,12 @@ function Products() {
             {products.map((product) => (
               <TableRow key={product.id}>
                 <TableCell>{product.name}</TableCell>
-                <TableCell>${Number(product.purchase_price).toFixed(2)}</TableCell>
-                <TableCell>${Number(product.selling_price).toFixed(2)}</TableCell>
+                <TableCell>{product.purchase_price}</TableCell>
+                <TableCell>{product.selling_price}</TableCell>
+                <TableCell>{product.supplier.name}</TableCell>
                 <TableCell>
-                  {suppliers.find(s => s.id === product.supplier_id)?.name || 'No Supplier'}
-                </TableCell>
-                <TableCell>
-                  <Button color="primary" onClick={() => handleOpen(product)}>Edit</Button>
-                  <Button color="error" onClick={() => handleDelete(product.id)}>Delete</Button>
+                  <Button variant="contained" color="primary" onClick={() => handleEdit(product)}>Edit</Button>
+                  <Button variant="contained" color="secondary" onClick={() => handleDelete(product.id)}>Delete</Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -154,53 +116,40 @@ function Products() {
         <DialogTitle>{isEdit ? 'Edit Product' : 'Add Product'}</DialogTitle>
         <DialogContent>
           <TextField
-            autoFocus
-            margin="dense"
             label="Name"
-            fullWidth
             value={currentProduct.name}
             onChange={(e) => setCurrentProduct({ ...currentProduct, name: e.target.value })}
+            fullWidth
+            margin="normal"
           />
           <TextField
-            margin="dense"
             label="Purchase Price"
-            type="number"
-            fullWidth
             value={currentProduct.purchase_price}
             onChange={(e) => setCurrentProduct({ ...currentProduct, purchase_price: e.target.value })}
+            fullWidth
+            margin="normal"
           />
           <TextField
-            margin="dense"
             label="Selling Price"
-            type="number"
-            fullWidth
             value={currentProduct.selling_price}
             onChange={(e) => setCurrentProduct({ ...currentProduct, selling_price: e.target.value })}
+            fullWidth
+            margin="normal"
           />
           <TextField
-            select
-            margin="dense"
             label="Supplier"
-            fullWidth
-            value={currentProduct.supplier_id || ''}
+            value={currentProduct.supplier_id}
             onChange={(e) => setCurrentProduct({ ...currentProduct, supplier_id: e.target.value })}
-          >
-            <MenuItem value="">Select a supplier</MenuItem>
-            {suppliers.map((supplier) => (
-              <MenuItem key={supplier.id} value={supplier.id}>
-                {supplier.name}
-              </MenuItem>
-            ))}
-          </TextField>
+            fullWidth
+            margin="normal"
+          />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit} variant="contained" color="primary">
-            {isEdit ? 'Update' : 'Add'}
-          </Button>
+          <Button onClick={handleClose} color="primary">Cancel</Button>
+          <Button onClick={handleSubmit} color="primary">{isEdit ? 'Update' : 'Add'}</Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   );
 }
 

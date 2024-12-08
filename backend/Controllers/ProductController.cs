@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InventoryManagementSystem.Data;
 using InventoryManagementSystem.Models;
-using InventoryManagementSystem.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManagementSystem.Controllers
@@ -12,37 +11,39 @@ namespace InventoryManagementSystem.Controllers
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
-        private readonly ProductService _productService;
         private readonly ApplicationDbContext _context;
 
-        public ProductController(ProductService productService, ApplicationDbContext context)
+        public ProductController(ApplicationDbContext context)
         {
-            _productService = productService;
             _context = context;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Product>> GetAllProducts()
+        public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
         {
-            return await _productService.GetAllProductsAsync();
+            return await _context.Products.Include(p => p.Supplier).ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProductById(int id)
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            var product = await _productService.GetProductByIdAsync(id);
+            var product = await _context.Products.Include(p => p.Supplier).FirstOrDefaultAsync(p => p.Id == id);
+
             if (product == null)
             {
                 return NotFound();
             }
+
             return product;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> AddProduct(Product product)
+        public async Task<ActionResult<Product>> CreateProduct(Product product)
         {
-            var createdProduct = await _productService.AddProductAsync(product);
-            return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.Id }, createdProduct);
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
         }
 
         [HttpPut("{id}")]
@@ -53,21 +54,45 @@ namespace InventoryManagementSystem.Controllers
                 return BadRequest();
             }
 
-            await _productService.UpdateProductAsync(product);
+            _context.Entry(product).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProductExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            await _productService.DeleteProductAsync(id);
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+
             return NoContent();
         }
 
-        [HttpGet("with-supplier")]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        private bool ProductExists(int id)
         {
-            return await _context.Products.Include(p => p.Supplier).ToListAsync();
+            return _context.Products.Any(e => e.Id == id);
         }
     }
 }

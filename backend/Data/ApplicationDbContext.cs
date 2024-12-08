@@ -12,6 +12,7 @@ namespace InventoryManagementSystem.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -35,14 +36,14 @@ namespace InventoryManagementSystem.Data
 
             // Seed data for Suppliers
             modelBuilder.Entity<Supplier>().HasData(
-                new Supplier { Id = 1, Name = "Supplier 1", ContactInfo = "Contact 1" },
-                new Supplier { Id = 2, Name = "Supplier 2", ContactInfo = "Contact 2" }
+                new Supplier { Id = 1, Name = "Srk", ContactPerson = "Srk Prasad", Email = "srk@email.com" },
+                new Supplier { Id = 2, Name = "Gnane", ContactPerson = "Gnaneswer", Email = "gnane@example.com" }
             );
 
             // Seed data for Products with foreign key values
             modelBuilder.Entity<Product>().HasData(
-                new Product { Id = 1, Name = "Product 1", PurchasePrice = 10.0m, SellingPrice = 15.0m, SupplierId = 1 },
-                new Product { Id = 2, Name = "Product 2", PurchasePrice = 20.0m, SellingPrice = 25.0m, SupplierId = 2 }
+                new Product { Id = 1, Name = "Phone", PurchasePrice = 499.0m, SellingPrice = 599.0m, SupplierId = 1 },
+                new Product { Id = 2, Name = "Television", PurchasePrice = 299.0m, SellingPrice = 399.0m, SupplierId = 2 }
             );
         }
     }

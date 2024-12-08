@@ -40,7 +40,7 @@ function Dashboard() {
         <Card>
           <CardContent>
             <Typography variant="h6">Total Products</Typography>
-            <Typography variant="h3">stats.products</Typography>
+            <Typography variant="h3">{stats.products}</Typography>
           </CardContent>
         </Card>
       </Grid2>
@@ -48,7 +48,7 @@ function Dashboard() {
         <Card>
           <CardContent>
             <Typography variant="h6">Total Suppliers</Typography>
-            <Typography variant="h3">stats.suppliers</Typography>
+            <Typography variant="h3">{stats.suppliers}</Typography>
           </CardContent>
         </Card>
       </Grid2>
@@ -56,7 +56,7 @@ function Dashboard() {
         <Card>
           <CardContent>
           <Typography variant="h6">Low Stock Items</Typography>
-          <Typography variant="h3">stats.lowStock</Typography>
+          <Typography variant="h3">{stats.lowStock}</Typography>
           </CardContent>
         </Card>
       </Grid2>

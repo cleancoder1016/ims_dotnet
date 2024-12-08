@@ -8,5 +8,6 @@ namespace InventoryManagementSystem.Models
         public decimal SellingPrice { get; set; }
         public int SupplierId { get; set; }
         public Supplier Supplier { get; set; }
+        public string Actions { get; set; } = string.Empty;
     }
 }

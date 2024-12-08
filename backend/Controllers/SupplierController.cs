@@ -1,19 +1,19 @@
-using Microsoft.AspNetCore.Mvc;
 using InventoryManagementSystem.Data;
 using InventoryManagementSystem.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class SuppliersController : ControllerBase
+    [Route("api/[controller]")]
+    public class SupplierController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public SuppliersController(ApplicationDbContext context)
+        public SupplierController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -25,3 +25,4 @@ namespace InventoryManagementSystem.Controllers
         }
     }
 }
+

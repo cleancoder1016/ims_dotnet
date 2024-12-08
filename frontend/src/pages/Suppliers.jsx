@@ -1,50 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Grid,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TextField,
-  Typography,
-  MenuItem,
-  Alert,
-} from '@mui/material';
 import axios from 'axios';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from '@mui/material';
 import '../styles/Suppliers.css';
 
 function Suppliers() {
   const [suppliers, setSuppliers] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [selectedSupplier, setSelectedSupplier] = useState(null);
   const [currentSupplier, setCurrentSupplier] = useState({
     name: '',
     contact_person: '',
     email: '',
-    phone: '',
-    address: ''
+    phone: ''
   });
   const [isEdit, setIsEdit] = useState(false);
-  const [productDialogOpen, setProductDialogOpen] = useState(false);
-  const [newProduct, setNewProduct] = useState({
-    name: '',
-    purchase_price: '',
-    selling_price: ''
-  });
-  const [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     fetchSuppliers();
@@ -55,7 +23,7 @@ function Suppliers() {
       const response = await axios.get('/api/suppliers');
       setSuppliers(response.data);
     } catch (error) {
-      setError('Error fetching suppliers');
+      console.error('Error fetching suppliers:', error);
     }
   };
 
@@ -65,58 +33,47 @@ function Suppliers() {
 
   const handleClose = () => {
     setOpen(false);
-    setIsEdit(false);
     setCurrentSupplier({
       name: '',
       contact_person: '',
       email: '',
-      phone: '',
-      address: ''
+      phone: ''
     });
+    setIsEdit(false);
   };
+
   const handleEdit = (supplier) => {
-    setSelectedSupplier(supplier);
-    setCurrentSupplier({
-      name: supplier.name,
-      contact_person: supplier.contact_person,
-      email: supplier.email,
-      phone: supplier.phone,
-      address: supplier.address
-    });
+    setCurrentSupplier(supplier);
     setIsEdit(true);
-    setOpen(true);
+    handleOpen();
   };
+
   const handleDelete = async (id) => {
     try {
       await axios.delete(`/api/suppliers/${id}`);
       fetchSuppliers();
     } catch (error) {
-      setError('Error deleting supplier');
+      console.error('Error deleting supplier:', error);
     }
   };
+
   const handleSubmit = async () => {
     try {
       if (isEdit) {
-        await axios.put(`/api/suppliers/${selectedSupplier.id}`, currentSupplier);
+        await axios.put(`/api/suppliers/${currentSupplier.id}`, currentSupplier);
       } else {
         await axios.post('/api/suppliers', currentSupplier);
       }
       fetchSuppliers();
       handleClose();
     } catch (error) {
-      setError('Error saving supplier');
+      console.error('Error saving supplier:', error);
     }
   };
 
   return (
     <div className="suppliers-container">
-      <Typography variant="h4" gutterBottom className="suppliers-header">
-        Suppliers
-      </Typography>
-      {error && <Alert severity="error" className="suppliers-alert">{error}</Alert>}
-      <Button variant="contained" color="primary" onClick={handleOpen}>
-        Add Supplier
-      </Button>
+      <Button variant="contained" color="primary" onClick={handleOpen}>Add Supplier</Button>
       <TableContainer component={Paper} className="suppliers-table-container">
         <Table className="suppliers-table">
           <TableHead>
@@ -125,7 +82,6 @@ function Suppliers() {
               <TableCell>Contact Person</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Phone</TableCell>
-              <TableCell>Address</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -136,10 +92,9 @@ function Suppliers() {
                 <TableCell>{supplier.contact_person}</TableCell>
                 <TableCell>{supplier.email}</TableCell>
                 <TableCell>{supplier.phone}</TableCell>
-                <TableCell>{supplier.address}</TableCell>
                 <TableCell>
-                  <Button onClick={() => handleEdit(supplier)}>Edit</Button>
-                  <Button onClick={() => handleDelete(supplier.id)}>Delete</Button>
+                  <Button variant="contained" color="primary" onClick={() => handleEdit(supplier)}>Edit</Button>
+                  <Button variant="contained" color="secondary" onClick={() => handleDelete(supplier.id)}>Delete</Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -178,21 +133,10 @@ function Suppliers() {
             fullWidth
             margin="normal"
           />
-          <TextField
-            label="Address"
-            value={currentSupplier.address}
-            onChange={(e) => setCurrentSupplier({ ...currentSupplier, address: e.target.value })}
-            fullWidth
-            margin="normal"
-          />
         </DialogContent>
         <DialogActions className="suppliers-dialog-actions">
-          <Button onClick={handleClose} color="secondary">
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit} color="primary">
-            {isEdit ? 'Update' : 'Add'}
-          </Button>
+          <Button onClick={handleClose} color="primary">Cancel</Button>
+          <Button onClick={handleSubmit} color="primary">{isEdit ? 'Update' : 'Add'}</Button>
         </DialogActions>
       </Dialog>
     </div>
