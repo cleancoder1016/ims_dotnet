@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using InventoryManagementSystem.Models;
+using backend.Models;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace InventoryManagementSystem.Data
+namespace backend.Data
 {
     public class ApplicationDbContext : DbContext
     {

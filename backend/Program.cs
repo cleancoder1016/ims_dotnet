@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using InventoryManagementSystem.Data;
-using InventoryManagementSystem.Models;
+using backend.Data;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;

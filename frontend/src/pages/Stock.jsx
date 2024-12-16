@@ -10,6 +10,7 @@ import {
   Paper
 } from '@mui/material';
 import axios from 'axios';
+import config from '../config';
 import '../styles/Stock.css';
 
 function Stock({ stock = [], getProductName }) {
@@ -21,7 +22,7 @@ function Stock({ stock = [], getProductName }) {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('/api/products');
+      const response = await axios.get(`${config.apiBaseUrl}/products`);
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);

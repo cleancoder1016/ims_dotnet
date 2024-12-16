@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from '../config';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from '@mui/material';
 
 function Products() {
@@ -21,7 +22,7 @@ function Products() {
 
   const fetchSuppliers = async () => {
     try {
-      const response = await axios.get('/api/suppliers');
+      const response = await axios.get(`${config.apiBaseUrl}/suppliers`);
       setSuppliers(response.data);
     } catch (error) {
       console.error('Error fetching suppliers:', error);
@@ -30,7 +31,7 @@ function Products() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('/api/products');
+      const response = await axios.get(`${config.apiBaseUrl}/products`);
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -60,7 +61,7 @@ function Products() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/api/products/${id}`);
+      await axios.delete(`${config.apiBaseUrl}/products/${id}`);
       fetchProducts();
     } catch (error) {
       console.error('Error deleting product:', error);
@@ -70,9 +71,9 @@ function Products() {
   const handleSubmit = async () => {
     try {
       if (isEdit) {
-        await axios.put(`/api/products/${currentProduct.id}`, currentProduct);
+        await axios.put(`${config.apiBaseUrl}/products/${currentProduct.id}`, currentProduct);
       } else {
-        await axios.post('/api/products', currentProduct);
+        await axios.post(`${config.apiBaseUrl}/products`, currentProduct);
       }
       fetchProducts();
       handleClose();

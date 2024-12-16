@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace InventoryManagementSystem.Migrations
+namespace backend.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreateV2 : Migration

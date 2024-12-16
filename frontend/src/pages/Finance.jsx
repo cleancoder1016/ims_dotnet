@@ -23,6 +23,7 @@ import {
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
+import config from '../config';
 import {
   LineChart,
   Line,
@@ -54,7 +55,7 @@ function Finance() {
   const fetchTransactions = async () => {
     setTransactionsLoading(true);
     try {
-      const response = await axios.get('/api/transactions');
+      const response = await axios.get(`${config.apiBaseUrl}/transactions`);
       setTransactions(response.data);
     } catch (error) {
       console.error('Error fetching transactions:', error);
@@ -82,7 +83,7 @@ function Finance() {
         amount,
         notes
       };
-      await axios.post('/api/transactions', newTransaction);
+      await axios.post(`${config.apiBaseUrl}/transactions`, newTransaction);
       fetchTransactions();
       handleClose();
     } catch (error) {

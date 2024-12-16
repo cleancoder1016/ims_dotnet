@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/minimalist/Documents/ims_dotnet/ims_dotnet/backend/backend.csproj": {}
+    "/workspaces/ims_dotnet/backend/backend.csproj": {}
   },
   "projects": {
-    "/home/minimalist/Documents/ims_dotnet/ims_dotnet/backend/backend.csproj": {
+    "/workspaces/ims_dotnet/backend/backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/minimalist/Documents/ims_dotnet/ims_dotnet/backend/backend.csproj",
+        "projectUniqueName": "/workspaces/ims_dotnet/backend/backend.csproj",
         "projectName": "backend",
-        "projectPath": "/home/minimalist/Documents/ims_dotnet/ims_dotnet/backend/backend.csproj",
-        "packagesPath": "/home/minimalist/.nuget/packages/",
-        "outputPath": "/home/minimalist/Documents/ims_dotnet/ims_dotnet/backend/obj/",
+        "projectPath": "/workspaces/ims_dotnet/backend/backend.csproj",
+        "packagesPath": "/home/codespace/.nuget/packages/",
+        "outputPath": "/workspaces/ims_dotnet/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/minimalist/.nuget/NuGet/NuGet.Config"
+          "/home/codespace/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -51,11 +51,19 @@
               "target": "Package",
               "version": "[9.0.0, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[9.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.0, )"
             },
@@ -83,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/254/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.402/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

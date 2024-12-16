@@ -1,8 +1,8 @@
-using InventoryManagementSystem.Models;
+using backend.Models;
 using System.Collections.Generic;
-using InventoryManagementSystem.Repositories;
+using backend.Repositories;
 
-namespace InventoryManagementSystem.Services
+namespace backend.Services
 {
     public class ProductService
     {

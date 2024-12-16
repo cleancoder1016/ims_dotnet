@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from '../config';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from '@mui/material';
 import '../styles/Suppliers.css';
 
@@ -20,7 +21,7 @@ function Suppliers() {
 
   const fetchSuppliers = async () => {
     try {
-      const response = await axios.get('/api/suppliers');
+      const response = await axios.get(`${config.apiBaseUrl}/suppliers`);
       setSuppliers(response.data);
     } catch (error) {
       console.error('Error fetching suppliers:', error);

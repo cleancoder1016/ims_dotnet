@@ -1,11 +1,11 @@
-using InventoryManagementSystem.Data;
-using InventoryManagementSystem.Models;
+using backend.Data;
+using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace InventoryManagementSystem.Controllers
+namespace backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

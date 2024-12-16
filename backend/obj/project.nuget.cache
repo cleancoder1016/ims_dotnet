@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qKCWZzfiEYk=",
+  "dgSpecHash": "LhENan36koU=",
   "success": true,
-  "projectFilePath": "/workspaces/ims_dotnet/backend/InventoryManagementSystem.csproj",
+  "projectFilePath": "/workspaces/ims_dotnet/backend/backend.csproj",
   "expectedPackageFiles": [
     "/home/codespace/.nuget/packages/azure.core/1.38.0/azure.core.1.38.0.nupkg.sha512",
     "/home/codespace/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",

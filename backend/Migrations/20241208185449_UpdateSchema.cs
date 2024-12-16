@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace InventoryManagementSystem.Migrations
+namespace backend.Migrations
 {
     /// <inheritdoc />
     public partial class UpdateSchema : Migration

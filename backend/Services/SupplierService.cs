@@ -1,6 +1,6 @@
-using InventoryManagementSystem.Data;
+using backend.Data;
 
-namespace InventoryManagementSystem.Services
+namespace backend.Services
 {
     public class SupplierService
     {

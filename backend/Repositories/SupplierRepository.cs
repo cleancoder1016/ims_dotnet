@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using InventoryManagementSystem.Data;
-using InventoryManagementSystem.Models;
+using backend.Data;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace InventoryManagementSystem.Repositories
+namespace backend.Repositories
 {
     public class SupplierRepository : ISupplierRepository
     {

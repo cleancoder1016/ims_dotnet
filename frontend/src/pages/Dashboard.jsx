@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid2, Card, CardContent, Typography } from '@mui/material';
 import axios from 'axios';
+import config from '../config';
 
 function Dashboard() {
   const [stats, setStats] = useState({
@@ -12,9 +13,9 @@ function Dashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const productsRes = await axios.get('/api/products');
-        const suppliersRes = await axios.get('/api/suppliers');
-        const stockRes = await axios.get('/api/stock');
+        const productsRes = await axios.get(`${config.apiBaseUrl}/products`);
+        const suppliersRes = await axios.get(`${config.apiBaseUrl}/suppliers`);
+        const stockRes = await axios.get(`${config.apiBaseUrl}/stock`);
         
         setStats({
           products: productsRes.data.length,

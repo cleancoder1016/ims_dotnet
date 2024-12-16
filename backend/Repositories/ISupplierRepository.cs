@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using InventoryManagementSystem.Models;
+using backend.Models;
 
-namespace InventoryManagementSystem.Repositories
+namespace backend.Repositories
 {
     public interface ISupplierRepository
     {
